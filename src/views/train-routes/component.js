@@ -8,7 +8,7 @@ export default {
       addresses: [],
       listLoading: false,
       dialogAddVisible: false,
-      addAddressForm: {
+      form: {
         address: '',
         addressPhoto: {
           baseData: '',

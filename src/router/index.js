@@ -92,7 +92,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/documentation/index'),
         name: 'Documentation',
-        meta: { title: 'Documentation', icon: 'documentation', affix: true }
+        meta: { title: 'Documentation', icon: 'documentation', affix: false }
       }
     ]
   },
@@ -135,6 +135,18 @@ export const constantRoutes = [
         component: () => import('@/views/address/index'),
         name: 'Address',
         meta: { title: '地址管理', icon: 'guide', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/train-routes',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/train-routes/index'),
+        name: 'TrainRoutes',
+        meta: { title: '活动线路', icon: 'guide', noCache: true }
       }
     ]
   }
