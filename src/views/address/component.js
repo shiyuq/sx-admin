@@ -2,7 +2,7 @@ import addressService from '../../api/address-service'
 
 export default {
   name: 'Address',
-  data() {
+  data () {
     return {
       addresses: [],
       listLoading: false,
@@ -22,26 +22,26 @@ export default {
   },
   methods: {
     async getAddressList () {
-      const {data} = await addressService.getAddressList()
+      const { data } = await addressService.getAddressList()
       this.addresses = data
     },
-    getBase64(file) {
-      return new Promise(function(resolve, reject) {
-        let reader = new FileReader();
-        let imgResult = '';
-        reader.readAsDataURL(file);
-        reader.onload = function() {
-          imgResult = reader.result;
-        };
-        reader.onerror = function(error) {
-          reject(error);
-        };
-        reader.onloadend = function() {
-          resolve(imgResult);
-        };
-      });
+    getBase64 (file) {
+      return new Promise(function (resolve, reject) {
+        const reader = new FileReader()
+        let imgResult = ''
+        reader.readAsDataURL(file)
+        reader.onload = function () {
+          imgResult = reader.result
+        }
+        reader.onerror = function (error) {
+          reject(error)
+        }
+        reader.onloadend = function () {
+          resolve(imgResult)
+        }
+      })
     },
-    changeFile(file) {
+    changeFile (file) {
       this.getBase64(file.raw).then(data => {
         this.imageUrl = data
         this.addAddressForm.addressPhoto.baseData = data
@@ -62,4 +62,4 @@ export default {
       this.dialogAddVisible = false
     }
   }
-};
+}

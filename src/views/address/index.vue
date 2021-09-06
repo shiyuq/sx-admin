@@ -14,10 +14,7 @@
       <el-dialog title="添加地址" :visible.sync="dialogAddVisible">
         <el-form :model="addAddressForm">
           <el-form-item label="地址名称" :label-width="'120px'">
-            <el-input
-              v-model="addAddressForm.address"
-              autocomplete="off"
-            ></el-input>
+            <el-input v-model="addAddressForm.address" autocomplete="off" />
           </el-form-item>
           <el-form-item label="地址图片" :label-width="'120px'">
             <el-upload
@@ -28,15 +25,17 @@
               :on-change="changeFile"
             >
               <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogAddVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addAddress"
-            >确 定</el-button
-          >
+          <el-button @click="dialogAddVisible = false">
+            取 消
+          </el-button>
+          <el-button type="primary" @click="addAddress">
+            确 定
+          </el-button>
         </div>
       </el-dialog>
     </div>
