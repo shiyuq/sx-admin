@@ -1,22 +1,29 @@
+import Tinymce from '@/components/Tinymce'
 import addressService from '../../api/address-service'
 import fileUtil from '../../utils/file'
 
 export default {
-  name: 'Address',
-  data() {
+  name: 'TrainRoutes',
+  data () {
     return {
       addresses: [],
       listLoading: false,
       dialogAddVisible: false,
       form: {
-        address: '',
-        addressPhoto: {
+        title: '',
+        trainPhoto: {
           baseData: '',
-          fileName: 'addressPhoto.png'
-        }
+          fileName: 'trainRoutes.png'
+        },
+        addressId: '',
+        isRecommend: false,
+        content: ''
       },
       imageUrl: ''
     }
+  },
+  components: {
+    Tinymce
   },
   created () {
     this.getAddressList()
@@ -26,19 +33,27 @@ export default {
       const { data } = await addressService.getAddressList()
       this.addresses = data
     },
-    changeFile(file) {
+    changeFile (file) {
       fileUtil.getBase64(file.raw).then(data => {
         this.imageUrl = data
-        this.addAddressForm.addressPhoto.baseData = data
+        this.form.trainPhoto.baseData = data
       })
     },
-    async addAddress () {
-      if (!this.addAddressForm.address) {
-        this.$message.error('请输入地址名称')
+    async addRoutes () {
+      if (!this.form.title) {
+        this.$message.error('请输入活动线路名称')
         return
       }
-      if (!this.addAddressForm.addressPhoto.baseData) {
-        this.$message.error('请上传图片')
+      if (!this.form.trainPhoto.baseData) {
+        this.$message.error('请上传活动线路图片')
+        return
+      }
+      if (!this.form.addressId) {
+        this.$message.error('请选择活动地点')
+        return
+      }
+      if (!this.form.content) {
+        this.$message.error('请输入活动内容')
         return
       }
       await addressService.addAddress(this.addAddressForm)
