@@ -1,5 +1,6 @@
 import Tinymce from '@/components/Tinymce'
 import addressService from '../../api/address-service'
+import trainService from '../../api/train-service'
 import fileUtil from '../../utils/file'
 
 export default {
@@ -7,6 +8,7 @@ export default {
   data () {
     return {
       addresses: [],
+      trains: [],
       listLoading: false,
       dialogAddVisible: false,
       form: {
@@ -25,13 +27,20 @@ export default {
   components: {
     Tinymce
   },
-  created () {
-    this.getAddressList()
+  async created () {
+    await Promise.all([
+      this.getAddressList(),
+      this.getTrainList()
+    ])
   },
   methods: {
     async getAddressList () {
       const { data } = await addressService.getAddressList()
       this.addresses = data
+    },
+    async getTrainList () {
+      const { data } = await trainService.getTrainList()
+      this.trains = data
     },
     changeFile (file) {
       fileUtil.getBase64(file.raw).then(data => {
@@ -56,9 +65,9 @@ export default {
         this.$message.error('请输入活动内容')
         return
       }
-      await addressService.addAddress(this.addAddressForm)
-      await this.getAddressList()
-      this.$message.success('地址添加成功')
+      await trainService.addTrain(this.form)
+      await this.getTrainList()
+      this.$message.success('活动线路添加成功')
       this.dialogAddVisible = false
     }
   }

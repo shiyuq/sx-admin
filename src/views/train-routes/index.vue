@@ -7,11 +7,15 @@
         icon="el-icon-edit"
         @click="dialogAddVisible = true"
       >
-        添加地址
+        添加活动线路
       </el-button>
     </div>
     <div class="dialog">
-      <el-dialog title="添加活动线路" :visible.sync="dialogAddVisible">
+      <el-dialog
+        title="添加活动线路"
+        :visible.sync="dialogAddVisible"
+        :width="'80%'"
+      >
         <el-form :model="form">
           <el-form-item label="请选择活动地点" :label-width="'120px'">
             <el-select v-model="form.addressId" placeholder="请选择活动地点">
@@ -57,7 +61,7 @@
     </div>
     <el-table
       v-loading="listLoading"
-      :data="addresses"
+      :data="trains"
       border
       fit
       highlight-current-row
