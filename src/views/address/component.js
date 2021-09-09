@@ -3,7 +3,7 @@ import fileUtil from '../../utils/file'
 
 export default {
   name: 'Address',
-  data() {
+  data () {
     return {
       addresses: [],
       listLoading: false,
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     async getAddressList () {
-      const {data} = await addressService.getAddressList()
+      const { data } = await addressService.getAddressList()
       this.addresses = data
     },
     changeFile(file) {
@@ -47,4 +47,4 @@ export default {
       this.dialogAddVisible = false
     }
   }
-};
+}

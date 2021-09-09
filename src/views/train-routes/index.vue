@@ -7,17 +7,35 @@
         icon="el-icon-edit"
         @click="dialogAddVisible = true"
       >
-        添加地址
+        添加活动线路
       </el-button>
     </div>
     <div class="dialog">
-      <el-dialog title="添加地址" :visible.sync="dialogAddVisible">
-        <el-form :model="addAddressForm">
-          <el-form-item label="地址名称" :label-width="'120px'">
-            <el-input
-              v-model="addAddressForm.address"
-              autocomplete="off"
-            ></el-input>
+      <el-dialog
+        title="添加活动线路"
+        :visible.sync="dialogAddVisible"
+        :width="'80%'"
+      >
+        <el-form :model="form">
+          <el-form-item label="请选择活动地点" :label-width="'120px'">
+            <el-select v-model="form.addressId" placeholder="请选择活动地点">
+              <el-option
+                v-for="item in addresses"
+                :key="item.id"
+                :label="item.address"
+                :value="item.id"
+              />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="活动名称" :label-width="'120px'">
+            <el-input v-model="form.title" autocomplete="off" />
+          </el-form-item>
+          <el-form-item label="是否推荐" :label-width="'120px'">
+            <el-switch
+              v-model="form.isRecommend"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+            />
           </el-form-item>
           <el-form-item label="地址图片" :label-width="'120px'">
             <el-upload
@@ -28,21 +46,22 @@
               :on-change="changeFile"
             >
               <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
+          </el-form-item>
+          <el-form-item label="活动路线内容" :label-width="'120px'">
+            <tinymce v-model="form.content" :height="300" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogAddVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addAddress"
-            >确 定</el-button
-          >
+          <el-button type="primary" @click="addRoutes">确 定</el-button>
         </div>
       </el-dialog>
     </div>
     <el-table
       v-loading="listLoading"
-      :data="addresses"
+      :data="trains"
       border
       fit
       highlight-current-row
