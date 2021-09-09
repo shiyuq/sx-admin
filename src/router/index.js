@@ -149,6 +149,54 @@ export const constantRoutes = [
         meta: { title: '活动线路', icon: 'guide', noCache: true }
       }
     ]
+  },
+  {
+    path: '/camera',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/camera/index'),
+        name: 'Camera',
+        meta: { title: '培训掠影', icon: 'guide', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/certificate',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/certificate/index'),
+        name: 'Certificate',
+        meta: { title: '资质证书', icon: 'guide', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/company',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/company/index'),
+        name: 'Company',
+        meta: { title: '企业风采', icon: 'guide', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/teacher',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/teacher/index'),
+        name: 'Teacher',
+        meta: { title: '教师风采', icon: 'guide', noCache: true }
+      }
+    ]
   }
 ]
 
