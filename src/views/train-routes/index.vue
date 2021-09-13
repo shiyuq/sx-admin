@@ -20,10 +20,10 @@
           <el-form-item label="请选择活动地点" :label-width="'120px'">
             <el-select v-model="form.addressId" placeholder="请选择活动地点">
               <el-option
-                v-for="item in trains"
+                v-for="item in addresses"
                 :key="item.id"
                 :label="item.address"
-                :value="item.address"
+                :value="item.id"
               />
             </el-select>
           </el-form-item>
@@ -45,7 +45,7 @@
               :auto-upload="false"
               :on-change="changeFile"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
           </el-form-item>
@@ -63,7 +63,7 @@
     </div>
     <el-table
       v-loading="listLoading"
-      :data="addresses.items"
+      :data="trains.items"
       border
       fit
       highlight-current-row
@@ -87,25 +87,10 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="操作" width="320">
+      <el-table-column width="280px" align="center" label="操作">
         <template slot-scope="{ row }">
-          <el-button
-            v-if="row.edit"
-            type="success"
-            size="small"
-            icon="el-icon-circle-check-outline"
-            @click="confirmEdit(row)"
-          >
-            删除地址
-          </el-button>
-          <el-button
-            v-else
-            type="primary"
-            size="small"
-            icon="el-icon-edit"
-            @click="row.edit = !row.edit"
-          >
-            编辑地址
+          <el-button type="danger" size="small" @click="deleteTrains(row)">
+            删除
           </el-button>
         </template>
       </el-table-column>
@@ -114,7 +99,7 @@
       background
       :page-size="10"
       layout="prev,pager,next"
-      :total="addresses.totalCount"
+      :total="trains.totalCount"
       @current-change="changePage"
     />
   </div>

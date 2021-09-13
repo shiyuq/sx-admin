@@ -13,7 +13,13 @@ const addCamera = async (params) => {
   return data
 }
 
+const deleteCamera = async (params) => {
+  const { data } = await createInstance(baseUrl).post('/camera/delete', params)
+  return data
+}
+
 export default {
   getCameraList,
-  addCamera
+  addCamera,
+  deleteCamera
 }

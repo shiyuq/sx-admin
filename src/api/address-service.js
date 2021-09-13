@@ -8,6 +8,11 @@ const getAddressList = async(params) => {
   return data
 }
 
+const getAddresses = async () => {
+  const { data } = await createInstance(baseUrl).post('/address/list')
+  return data
+}
+
 const addAddress = async (params) => {
   const { data } = await createInstance(baseUrl).post('/address/add', params)
   return data
@@ -15,5 +20,6 @@ const addAddress = async (params) => {
 
 export default {
   getAddressList,
+  getAddresses,
   addAddress
 }

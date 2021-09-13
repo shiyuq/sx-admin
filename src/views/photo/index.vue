@@ -7,13 +7,13 @@
         icon="el-icon-edit"
         @click="dialogAddVisible = true"
       >
-        添加培训掠影
+        上传图片
       </el-button>
     </div>
     <div class="dialog">
-      <el-dialog title="添加培训掠影" :visible.sync="dialogAddVisible">
+      <el-dialog title="上传图片" :visible.sync="dialogAddVisible">
         <el-form :model="form">
-          <el-form-item label="培训掠影图片" :label-width="'120px'">
+          <el-form-item label="上传图片" :label-width="'120px'">
             <el-upload
               class="avatar-uploader"
               :action="''"
@@ -30,7 +30,7 @@
           <el-button @click="dialogAddVisible = false">
             取 消
           </el-button>
-          <el-button type="primary" @click="addCamera">
+          <el-button type="primary" @click="uploadImg">
             确 定
           </el-button>
         </div>
@@ -38,33 +38,15 @@
     </div>
     <el-table
       v-loading="listLoading"
-      :data="cameras.items"
+      :data="photos.items"
       border
       fit
       highlight-current-row
       style="width: 100%"
     >
-      <el-table-column align="center" label="培训掠影标识" width="200">
-        <template slot-scope="{ row }">
-          <span>{{ row.id }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="180px" align="center" label="培训掠影图片">
-        <template slot-scope="{ row }">
-          <img :src="row.cameraPhotoUrl" alt="" style="height: 50px;" />
-        </template>
-      </el-table-column>
-
-      <el-table-column width="180px" align="center" label="创建时间">
-        <template slot-scope="{ row }">
-          <span>{{ row.createdTime }}</span>
-        </template>
-      </el-table-column>
-
       <el-table-column width="180px" align="center" label="图片地址">
         <template slot-scope="{ row }">
-          <span>{{ row.cameraPhotoUrl }}</span>
+          <span>{{ row.url }}</span>
         </template>
       </el-table-column>
 
@@ -76,13 +58,6 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      background
-      :page-size="10"
-      layout="prev, pager, next"
-      :total="cameras.totalCount"
-      @current-change="changePage"
-    />
   </div>
 </template>
 

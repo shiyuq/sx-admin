@@ -44,7 +44,7 @@ export default {
         return
       }
       await companyService.addCompany(this.form)
-      await this.getCompanyList()
+      await this.getCompanyList({ limit: 10, offset: 0 })
       this.$message.success('企业风采添加成功')
       this.dialogAddVisible = false
     }

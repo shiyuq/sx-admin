@@ -43,7 +43,7 @@ export default {
         return
       }
       await certificateService.addCertificate(this.form)
-      await this.getCertificateList()
+      await this.getCertificateList({ limit: 10, offset: 0 })
       this.$message.success('资质证书添加成功')
       this.dialogAddVisible = false
     }

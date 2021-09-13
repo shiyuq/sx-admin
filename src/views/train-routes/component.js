@@ -7,11 +7,11 @@ export default {
   name: 'TrainRoutes',
   data () {
     return {
-      addresses: {
+      trains: {
         totalCount: 0,
         items: []
       },
-      trains: [],
+      addresses: [],
       listLoading: false,
       dialogAddVisible: false,
       form: {
@@ -32,27 +32,52 @@ export default {
   },
   async created () {
     await Promise.all([
-      this.getAddressList({ limit: 10, offset: 0 }),
-      this.getTrainList()
+      this.getAddressList(),
+      this.getTrainList({ limit: 10, offset: 0 })
     ])
   },
   methods: {
-    async getAddressList ({ limit = 10, offset = 0 }) {
-      const { data } = await addressService.getAddressList({ limit, offset })
+    async getAddressList () {
+      const { data } = await addressService.getAddresses()
       this.addresses = data
     },
-    async changePage (currentPage) {
-      await this.getAddressList({ limit: 10, offset: (currentPage - 1) * 10 })
-    },
-    async getTrainList () {
-      const { data } = await trainService.getTrainList()
+    async getTrainList ({ limit = 10, offset = 0 }) {
+      const { data } = await trainService.getTrainList({ limit, offset })
       this.trains = data
-      console.log(this.trains)
+    },
+    async changePage (currentPage) {
+      await this.getTrainList({ limit: 10, offset: (currentPage - 1) * 10 })
     },
     changeFile (file) {
       fileUtil.getBase64(file.raw).then(data => {
         this.imageUrl = data
         this.form.trainPhoto.baseData = data
+      })
+    },
+    async deleteTrains (row) {
+      this.$confirm('此操作将永久删除该培训线路, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        if (!row.id) {
+          this.$message({
+            type: 'error',
+            message: '请选择培训线路!'
+          })
+          return
+        }
+        await trainService.deleteTrains({ id: row.id })
+        await this.getTrainList({ limit: 10, offset: 0 })
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     },
     async addRoutes () {
@@ -73,7 +98,7 @@ export default {
         return
       }
       await trainService.addTrain(this.form)
-      await this.getTrainList()
+      await this.getTrainList({ limit: 10, offset: 0 })
       this.$message.success('活动线路添加成功')
       this.dialogAddVisible = false
     }

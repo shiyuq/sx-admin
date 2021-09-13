@@ -221,6 +221,18 @@ export const constantRoutes = [
         meta: { title: '新闻动态', icon: 'guide', noCache: true }
       }
     ]
+  },
+  {
+    path: '/photo',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/photo/index'),
+        name: 'Photo',
+        meta: { title: '上传图片', icon: 'guide', noCache: true }
+      }
+    ]
   }
 ]
 

@@ -45,7 +45,7 @@ export default {
         return
       }
       await teacherService.addTeacher(this.form)
-      await this.getTeacherList()
+      await this.getTeacherList({ limit: 10, offset: 0 })
       this.$message.success('教师风采添加成功')
       this.dialogAddVisible = false
     }
