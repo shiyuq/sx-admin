@@ -5,7 +5,10 @@ export default {
   name: 'Camera',
   data () {
     return {
-      cameras: [],
+      cameras: {
+        totalCount: 0,
+        items: []
+      },
       listLoading: false,
       dialogAddVisible: false,
       form: {
@@ -18,12 +21,15 @@ export default {
     }
   },
   created () {
-    this.getCameraList()
+    this.getCameraList({ limit: 10, offset: 0 })
   },
   methods: {
-    async getCameraList () {
-      const { data } = await cameraService.getCameraList()
+    async getCameraList ({ limit = 10, offset = 0 }) {
+      const { data } = await cameraService.getCameraList({ limit, offset })
       this.cameras = data
+    },
+    async changePage (currentPage) {
+      await this.getCameraList({ limit: 10, offset: (currentPage - 1) * 10 })
     },
     changeFile(file) {
       fileUtil.getBase64(file.raw).then(data => {

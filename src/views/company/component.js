@@ -5,7 +5,10 @@ export default {
   name: 'Company',
   data () {
     return {
-      companys: [],
+      companys: {
+        totalCount: 0,
+        items: []
+      },
       listLoading: false,
       dialogAddVisible: false,
       form: {
@@ -19,12 +22,15 @@ export default {
     }
   },
   created () {
-    this.getCompanyList()
+    this.getCompanyList({ limit: 10, offset: 0 })
   },
   methods: {
-    async getCompanyList () {
-      const { data } = await companyService.getCompanyList()
+    async getCompanyList ({ limit = 10, offset = 0 }) {
+      const { data } = await companyService.getCompanyList({ limit, offset })
       this.companys = data
+    },
+    async changePage (currentPage) {
+      await this.getCompanyList({ limit: 10, offset: (currentPage - 1) * 10 })
     },
     changeFile(file) {
       fileUtil.getBase64(file.raw).then(data => {

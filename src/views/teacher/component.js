@@ -5,7 +5,10 @@ export default {
   name: 'Teacher',
   data () {
     return {
-      teachers: [],
+      teachers: {
+        totalCount: 0,
+        items: []
+      },
       listLoading: false,
       dialogAddVisible: false,
       form: {
@@ -20,12 +23,15 @@ export default {
     }
   },
   created () {
-    this.getTeacherList()
+    this.getTeacherList({ limit: 10, offset: 0 })
   },
   methods: {
-    async getTeacherList () {
-      const { data } = await teacherService.getTeacherList()
+    async getTeacherList ({ limit = 10, offset = 0 }) {
+      const { data } = await teacherService.getTeacherList({ limit, offset })
       this.teachers = data
+    },
+    async changePage (currentPage) {
+      await this.getTeacherList({ limit: 10, offset: (currentPage - 1) * 10 })
     },
     changeFile(file) {
       fileUtil.getBase64(file.raw).then(data => {

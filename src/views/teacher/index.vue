@@ -21,7 +21,7 @@
               :auto-upload="false"
               :on-change="changeFile"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <img v-if="imageUrl" :src="imageUrl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
           </el-form-item>
@@ -38,7 +38,7 @@
     </div>
     <el-table
       v-loading="listLoading"
-      :data="teachers"
+      :data="teachers.items"
       border
       fit
       highlight-current-row
@@ -52,10 +52,29 @@
 
       <el-table-column width="180px" align="center" label="教师风采图片">
         <template slot-scope="{ row }">
-          <img :src="row.teacherPhotoUrl" alt="" style="height: 50px;" />
+          <img :src="row.teacherPhotoUrl" alt="" style="height: 50px;">
+        </template>
+      </el-table-column>
+
+      <el-table-column width="180px" align="center" label="创建时间">
+        <template slot-scope="{ row }">
+          <span>{{ row.createdTime }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column width="180px" align="center" label="图片地址">
+        <template slot-scope="{ row }">
+          <span>{{ row.teacherPhotoUrl }}</span>
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      background
+      :page-size="10"
+      layout="prev, pager, next"
+      :total="teachers.totalCount"
+      @current-change="changePage"
+    />
   </div>
 </template>
 

@@ -3,8 +3,8 @@ import config from '../config/api-config'
 
 const baseUrl = config.customerServiceAdmin
 
-const getCertificateList = async() => {
-  const { data } = await createInstance(baseUrl).post('/certificate/list')
+const getCertificateList = async(params) => {
+  const { data } = await createInstance(baseUrl).post('/certificate/get-certificate-list', params)
   return data
 }
 

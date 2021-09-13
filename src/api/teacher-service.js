@@ -3,8 +3,8 @@ import config from '../config/api-config'
 
 const baseUrl = config.customerServiceAdmin
 
-const getTeacherList = async() => {
-  const { data } = await createInstance(baseUrl).post('/teacher/list')
+const getTeacherList = async(params) => {
+  const { data } = await createInstance(baseUrl).post('/teacher/get-teacher-list', params)
   return data
 }
 

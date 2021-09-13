@@ -21,7 +21,7 @@
               :auto-upload="false"
               :on-change="changeFile"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <img v-if="imageUrl" :src="imageUrl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
           </el-form-item>
@@ -38,7 +38,7 @@
     </div>
     <el-table
       v-loading="listLoading"
-      :data="companys"
+      :data="companys.items"
       border
       fit
       highlight-current-row
@@ -52,10 +52,29 @@
 
       <el-table-column width="180px" align="center" label="企业风采图片">
         <template slot-scope="{ row }">
-          <img :src="row.companyPhotoUrl" alt="" style="height: 50px;" />
+          <img :src="row.companyPhotoUrl" alt="" style="height: 50px;">
+        </template>
+      </el-table-column>
+
+      <el-table-column align="center" label="企业风采标识" width="200">
+        <template slot-scope="{ row }">
+          <span>{{ row.createdTime }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column align="center" label="图片地址" width="200">
+        <template slot-scope="{ row }">
+          <span>{{ row.companyPhotoUrl }}</span>
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      background
+      :page-size="10"
+      layout="prev, pager, next"
+      :total="companys.totalCount"
+      @current-change="changePage"
+    />
   </div>
 </template>
 

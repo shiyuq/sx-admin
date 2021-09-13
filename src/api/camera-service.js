@@ -3,8 +3,8 @@ import config from '../config/api-config'
 
 const baseUrl = config.customerServiceAdmin
 
-const getCameraList = async() => {
-  const { data } = await createInstance(baseUrl).post('/camera/list')
+const getCameraList = async(params) => {
+  const { data } = await createInstance(baseUrl).post('/camera/get-camera-list', params)
   return data
 }
 

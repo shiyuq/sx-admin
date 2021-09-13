@@ -5,7 +5,10 @@ export default {
   name: 'Address',
   data () {
     return {
-      addresses: [],
+      addresses: {
+        totalCount: 0,
+        items: []
+      },
       listLoading: false,
       dialogAddVisible: false,
       addAddressForm: {
@@ -19,12 +22,15 @@ export default {
     }
   },
   created () {
-    this.getAddressList()
+    this.getAddressList({ limit: 10, offset: 0 })
   },
   methods: {
-    async getAddressList () {
-      const { data } = await addressService.getAddressList()
+    async getAddressList ({ limit = 10, offset = 0 }) {
+      const { data } = await addressService.getAddressList({ limit, offset })
       this.addresses = data
+    },
+    async changePage (currentPage) {
+      await this.getAddressList({ limit: 10, offset: (currentPage - 1) * 10 })
     },
     changeFile(file) {
       fileUtil.getBase64(file.raw).then(data => {

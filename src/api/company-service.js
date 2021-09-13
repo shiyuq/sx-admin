@@ -3,8 +3,8 @@ import config from '../config/api-config'
 
 const baseUrl = config.customerServiceAdmin
 
-const getCompanyList = async() => {
-  const { data } = await createInstance(baseUrl).post('/company/list')
+const getCompanyList = async(params) => {
+  const { data } = await createInstance(baseUrl).post('/company/get-company-list', params)
   return data
 }
 

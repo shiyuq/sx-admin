@@ -7,7 +7,10 @@ export default {
   name: 'TrainRoutes',
   data () {
     return {
-      addresses: [],
+      addresses: {
+        totalCount: 0,
+        items: []
+      },
       trains: [],
       listLoading: false,
       dialogAddVisible: false,
@@ -29,18 +32,22 @@ export default {
   },
   async created () {
     await Promise.all([
-      this.getAddressList(),
+      this.getAddressList({ limit: 10, offset: 0 }),
       this.getTrainList()
     ])
   },
   methods: {
-    async getAddressList () {
-      const { data } = await addressService.getAddressList()
+    async getAddressList ({ limit = 10, offset = 0 }) {
+      const { data } = await addressService.getAddressList({ limit, offset })
       this.addresses = data
+    },
+    async changePage (currentPage) {
+      await this.getAddressList({ limit: 10, offset: (currentPage - 1) * 10 })
     },
     async getTrainList () {
       const { data } = await trainService.getTrainList()
       this.trains = data
+      console.log(this.trains)
     },
     changeFile (file) {
       fileUtil.getBase64(file.raw).then(data => {

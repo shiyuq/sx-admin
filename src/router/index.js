@@ -197,6 +197,30 @@ export const constantRoutes = [
         meta: { title: '教师风采', icon: 'guide', noCache: true }
       }
     ]
+  },
+  {
+    path: '/consult',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/consult/index'),
+        name: 'Consult',
+        meta: { title: '用户咨询', icon: 'guide', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/news',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/news/index'),
+        name: 'News',
+        meta: { title: '新闻动态', icon: 'guide', noCache: true }
+      }
+    ]
   }
 ]
 

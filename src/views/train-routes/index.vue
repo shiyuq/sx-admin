@@ -20,10 +20,10 @@
           <el-form-item label="请选择活动地点" :label-width="'120px'">
             <el-select v-model="form.addressId" placeholder="请选择活动地点">
               <el-option
-                v-for="item in addresses"
+                v-for="item in trains"
                 :key="item.id"
                 :label="item.address"
-                :value="item.id"
+                :value="item.address"
               />
             </el-select>
           </el-form-item>
@@ -45,7 +45,7 @@
               :auto-upload="false"
               :on-change="changeFile"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <img v-if="imageUrl" :src="imageUrl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
           </el-form-item>
@@ -61,7 +61,7 @@
     </div>
     <el-table
       v-loading="listLoading"
-      :data="trains"
+      :data="addresses.items"
       border
       fit
       highlight-current-row
@@ -76,6 +76,12 @@
       <el-table-column width="180px" align="center" label="地址名称">
         <template slot-scope="{ row }">
           <span>{{ row.address }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column width="180px" align="center" label="创建时间">
+        <template slot-scope="{ row }">
+          <span>{{ row.createdTime }}</span>
         </template>
       </el-table-column>
 
@@ -102,6 +108,13 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      background
+      :page-size="10"
+      layout="prev,pager,next"
+      :total="addresses.totalCount"
+      @current-change="changePage"
+    />
   </div>
 </template>
 
