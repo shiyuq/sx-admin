@@ -69,15 +69,21 @@
       highlight-current-row
       style="width: 100%"
     >
-      <el-table-column align="center" label="地址标识" width="200">
-        <template slot-scope="{ row }">
-          <span>{{ row.id }}</span>
-        </template>
-      </el-table-column>
-
       <el-table-column width="180px" align="center" label="地址名称">
         <template slot-scope="{ row }">
           <span>{{ row.address }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column width="180px" align="center" label="活动标题">
+        <template slot-scope="{ row }">
+          <span>{{ row.title }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column width="180px" align="center" label="活动图片">
+        <template slot-scope="{ row }">
+          <img :src="row.addressPhotoUrl" alt="" style="height:50px" />
         </template>
       </el-table-column>
 

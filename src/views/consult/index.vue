@@ -55,6 +55,18 @@
       highlight-current-row
       style="width: 100%"
     >
+      <el-table-column width="180px" align="center" label="咨询标题">
+        <template slot-scope="{ row }">
+          <span>{{ row.title }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column width="180px" align="center" label="咨询信息">
+        <template slot-scope="{ row }">
+          <span>{{ row.consultContent }}</span>
+        </template>
+      </el-table-column>
+
       <el-table-column align="center" label="姓名" width="200">
         <template slot-scope="{ row }">
           <span>{{ row.name }}</span>
@@ -67,9 +79,9 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="180px" align="center" label="咨询信息">
+      <el-table-column width="180px" align="center" label="邮箱">
         <template slot-scope="{ row }">
-          <span>{{ row.consultContent }}</span>
+          <span>{{ row.email }}</span>
         </template>
       </el-table-column>
 

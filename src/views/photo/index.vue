@@ -36,28 +36,6 @@
         </div>
       </el-dialog>
     </div>
-    <el-table
-      v-loading="listLoading"
-      :data="photos.items"
-      border
-      fit
-      highlight-current-row
-      style="width: 100%"
-    >
-      <el-table-column width="180px" align="center" label="图片地址">
-        <template slot-scope="{ row }">
-          <span>{{ row.url }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="280px" align="center" label="操作">
-        <template slot-scope="{ row }">
-          <el-button type="danger" size="small" @click="deleteCamera(row)">
-            删除
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
   </div>
 </template>
 

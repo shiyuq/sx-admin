@@ -21,7 +21,7 @@
               :auto-upload="false"
               :on-change="changeFile"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
           </el-form-item>
@@ -44,27 +44,15 @@
       highlight-current-row
       style="width: 100%"
     >
-      <el-table-column align="center" label="资质证书标识" width="200">
-        <template slot-scope="{ row }">
-          <span>{{ row.id }}</span>
-        </template>
-      </el-table-column>
-
       <el-table-column width="180px" align="center" label="资质证书图片">
         <template slot-scope="{ row }">
-          <img :src="row.certificatePhotoUrl" alt="" style="height: 50px;">
+          <img :src="row.certificatePhotoUrl" alt="" style="height: 50px;" />
         </template>
       </el-table-column>
 
       <el-table-column width="180px" align="center" label="创建时间">
         <template slot-scope="{ row }">
           <span>{{ row.createdTime }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="180px" align="center" label="图片地址">
-        <template slot-scope="{ row }">
-          <span>{{ row.certificatePhotoUrl }}</span>
         </template>
       </el-table-column>
     </el-table>

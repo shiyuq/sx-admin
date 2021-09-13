@@ -63,13 +63,7 @@
       highlight-current-row
       style="width: 100%"
     >
-      <el-table-column align="center" label="新闻标识" width="200">
-        <template slot-scope="{ row }">
-          <span>{{ row.id }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="180px" align="center" label="类型名称">
+      <el-table-column width="180px" align="center" label="新闻类型">
         <template slot-scope="{ row }">
           <span>{{ row.typeName }}</span>
         </template>

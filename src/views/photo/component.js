@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     async showImgList () {
-      // const { data } = await photoService.upLoadImg()
       this.photos = []
     },
     changeFile(file) {
@@ -37,7 +36,6 @@ export default {
         return
       }
       const { data } = await photoService.upLoadImg(this.form)
-      // await this.upLoadImg()
       this.$message.success('图片上传成功')
       this.dialogAddVisible = false
       this.$alert(data.url, '图片路径', {

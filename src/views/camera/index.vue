@@ -62,12 +62,6 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="180px" align="center" label="图片地址">
-        <template slot-scope="{ row }">
-          <span>{{ row.cameraPhotoUrl }}</span>
-        </template>
-      </el-table-column>
-
       <el-table-column width="280px" align="center" label="操作">
         <template slot-scope="{ row }">
           <el-button type="danger" size="small" @click="deleteCamera(row)">
