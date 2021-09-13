@@ -33,7 +33,9 @@
           </el-form-item>
 
           <el-form-item label="新闻内容" :label-width="'120px'">
-            <tinymce v-model="form.content" :height="300" />
+            <div v-if="dialogAddVisible">
+              <tinymce v-model="form.content" :height="300" />
+            </div>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
