@@ -70,19 +70,19 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/401'),
     hidden: true
   },
-  // {
-  //   path: '/',
-  //   component: Layout,
-  //   redirect: '/dashboard',
-  //   children: [
-  //     {
-  //       path: 'dashboard',
-  //       component: () => import('@/views/dashboard/index'),
-  //       name: 'Dashboard',
-  //       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        name: 'Dashboard',
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
   {
     path: '/documentation',
     component: Layout,
@@ -127,30 +127,17 @@ export const constantRoutes = [
 
   // 这里是红色传承对应的路由URL
   {
-    path: '/',
+    path: '/address',
     component: Layout,
-    redirect: '/address',
     children: [
       {
         path: 'index',
         component: () => import('@/views/address/index'),
         name: 'Address',
-        meta: { title: '地址管理', icon: 'dashboard', affix: true }
+        meta: { title: '地址管理', icon: 'guide', noCache: true }
       }
     ]
   },
-  // {
-  //   path: '/address',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/address/index'),
-  //       name: 'Address',
-  //       meta: { title: '地址管理', icon: 'guide', noCache: true }
-  //     }
-  //   ]
-  // },
   {
     path: '/train-routes',
     component: Layout,
