@@ -7,7 +7,7 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import componentsRouter from './modules/components'
+// import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
@@ -70,19 +70,19 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/401'),
     hidden: true
   },
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
+  // {
+  //   path: '/',
+  //   component: Layout,
+  //   redirect: '/dashboard',
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       component: () => import('@/views/dashboard/index'),
+  //       name: 'Dashboard',
+  //       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+  //     }
+  //   ]
+  // },
   {
     path: '/documentation',
     component: Layout,
@@ -127,17 +127,30 @@ export const constantRoutes = [
 
   // 这里是红色传承对应的路由URL
   {
-    path: '/address',
+    path: '/',
     component: Layout,
+    redirect: '/address',
     children: [
       {
         path: 'index',
         component: () => import('@/views/address/index'),
         name: 'Address',
-        meta: { title: '地址管理', icon: 'guide', noCache: true }
+        meta: { title: '地址管理', icon: 'dashboard', affix: true }
       }
     ]
   },
+  // {
+  //   path: '/address',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/address/index'),
+  //       name: 'Address',
+  //       meta: { title: '地址管理', icon: 'guide', noCache: true }
+  //     }
+  //   ]
+  // },
   {
     path: '/train-routes',
     component: Layout,
@@ -299,7 +312,7 @@ export const asyncRoutes = [
   },
 
   /** when your routing map is too long, you can split it into small modules **/
-  componentsRouter,
+  // componentsRouter,
   chartsRouter,
   nestedRouter,
   tableRouter,
@@ -307,6 +320,7 @@ export const asyncRoutes = [
   {
     path: '/example',
     component: Layout,
+    hidden: true,
     redirect: '/example/list',
     name: 'Example',
     meta: {
