@@ -56,6 +56,12 @@
         </template>
       </el-table-column>
 
+      <el-table-column width="180px" align="center" label="教师简介">
+        <template slot-scope="{ row }">
+          <span>{{ row.content }}</span>
+        </template>
+      </el-table-column>
+
       <el-table-column width="180px" align="center" label="创建时间">
         <template slot-scope="{ row }">
           <span>{{ row.createdTime }}</span>

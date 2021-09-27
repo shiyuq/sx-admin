@@ -12,12 +12,12 @@ export default {
       listLoading: false,
       dialogAddVisible: false,
       form: {
-        name: '施雨强教授',
+        name: '',
         teacherPhoto: {
           baseData: '',
           fileName: 'teacherPhoto.png'
         },
-        content: '这是施雨强教授'
+        content: ''
       },
       imageUrl: ''
     }
