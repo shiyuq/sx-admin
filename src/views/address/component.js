@@ -36,7 +36,10 @@ export default {
     changeFile(file) {
       fileUtil.getBase64(file.raw).then(data => {
         this.imageUrl = data
-        this.addAddressForm.addressPhoto.baseData = data
+        this.addAddressForm.addressPhoto = {
+          baseData: data,
+          fileName: 'addressPhoto.png'
+        }
       })
     },
     async updateAddress () {
@@ -48,6 +51,7 @@ export default {
     async updateRow (row) {
       this.actionType = 'update'
       this.dialogAddVisible = !this.dialogAddVisible
+      this.imageUrl = row.addressPhotoUrl
       this.addAddressForm = {
         ...row,
         id: row.id
