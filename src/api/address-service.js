@@ -18,8 +18,14 @@ const addAddress = async (params) => {
   return data
 }
 
+const updateAddress = async (params) => {
+  const { data } = await createInstance(baseUrl).post('/address/update', params)
+  return data
+}
+
 export default {
   getAddressList,
   getAddresses,
-  addAddress
+  addAddress,
+  updateAddress
 }

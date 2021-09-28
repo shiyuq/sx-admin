@@ -15,10 +15,11 @@ export default {
         address: '',
         addressPhoto: {
           baseData: '',
-          fileName: 'addressPhoto.png'
+          fileName: ''
         }
       },
-      imageUrl: ''
+      imageUrl: '',
+      actionType: 'add'
     }
   },
   created () {
@@ -38,6 +39,20 @@ export default {
         this.addAddressForm.addressPhoto.baseData = data
       })
     },
+    async updateAddress () {
+      await addressService.updateAddress(this.addAddressForm)
+      await this.getAddressList({ limit: 10, offset: 0 })
+      this.$message.success('地址更新成功')
+      this.dialogAddVisible = false
+    },
+    async updateRow (row) {
+      this.actionType = 'update'
+      this.dialogAddVisible = !this.dialogAddVisible
+      this.addAddressForm = {
+        ...row,
+        id: row.id
+      }
+    },
     async addAddress () {
       if (!this.addAddressForm.address) {
         this.$message.error('请输入地址名称')
@@ -51,6 +66,17 @@ export default {
       await this.getAddressList()
       this.$message.success('地址添加成功')
       this.dialogAddVisible = false
+    },
+    showDialog () {
+      this.actionType = 'add'
+      this.dialogAddVisible = true
+      this.addAddressForm = {
+        address: '',
+        addressPhoto: {
+          baseData: '',
+          fileName: 'addressPhoto.png'
+        }
+      }
     }
   }
 }

@@ -5,13 +5,16 @@
         type="primary"
         size="small"
         icon="el-icon-edit"
-        @click="dialogAddVisible = true"
+        @click="showDialog"
       >
         添加地址
       </el-button>
     </div>
     <div class="dialog">
-      <el-dialog title="添加地址" :visible.sync="dialogAddVisible">
+      <el-dialog
+        :title="actionType === 'add' ? '添加地址' : '更新地址'"
+        :visible.sync="dialogAddVisible"
+      >
         <el-form :model="addAddressForm">
           <el-form-item label="地址名称" :label-width="'120px'">
             <el-input v-model="addAddressForm.address" autocomplete="off" />
@@ -33,8 +36,15 @@
           <el-button @click="dialogAddVisible = false">
             取 消
           </el-button>
-          <el-button type="primary" @click="addAddress">
+          <el-button
+            v-if="actionType === 'add'"
+            type="primary"
+            @click="addAddress"
+          >
             确 定
+          </el-button>
+          <el-button v-else type="primary" @click="updateAddress">
+            更新
           </el-button>
         </div>
       </el-dialog>
@@ -60,6 +70,12 @@
           </template>
         </el-table-column>
 
+        <el-table-column width="180px" align="center" label="地址图片">
+          <template slot-scope="{ row }">
+            <img :src="row.addressPhotoUrl" alt="" style="height:50px" />
+          </template>
+        </el-table-column>
+
         <el-table-column width="180px" align="center" label="创建时间">
           <template slot-scope="{ row }">
             <span>{{ row.createdTime }}</span>
@@ -68,23 +84,8 @@
 
         <el-table-column align="center" label="操作" width="320">
           <template slot-scope="{ row }">
-            <el-button
-              v-if="row.edit"
-              type="success"
-              size="small"
-              icon="el-icon-circle-check-outline"
-              @click="confirmEdit(row)"
-            >
-              删除地址
-            </el-button>
-            <el-button
-              v-else
-              type="primary"
-              size="small"
-              icon="el-icon-edit"
-              @click="row.edit = !row.edit"
-            >
-              编辑地址
+            <el-button type="primary" size="small" @click="updateRow(row)">
+              更新
             </el-button>
           </template>
         </el-table-column>
