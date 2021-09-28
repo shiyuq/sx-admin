@@ -1,3 +1,4 @@
+import Tinymce from '@/components/Tinymce'
 import teacherService from '../../api/teacher-service'
 import fileUtil from '../../utils/file'
 
@@ -24,6 +25,9 @@ export default {
   },
   created () {
     this.getTeacherList({ limit: 10, offset: 0 })
+  },
+  components: {
+    Tinymce
   },
   methods: {
     async getTeacherList ({ limit = 10, offset = 0 }) {

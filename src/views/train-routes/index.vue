@@ -5,14 +5,14 @@
         type="primary"
         size="small"
         icon="el-icon-edit"
-        @click="dialogAddVisible = true"
+        @click="showDialog"
       >
         添加活动线路
       </el-button>
     </div>
     <div class="dialog">
       <el-dialog
-        title="添加活动线路"
+        :title="actionType === 'add' ? '添加活动线路' : '更新活动线路'"
         :visible.sync="dialogAddVisible"
         :width="'80%'"
       >
@@ -57,7 +57,16 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogAddVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addRoutes">确 定</el-button>
+          <el-button
+            v-if="actionType === 'add'"
+            type="primary"
+            @click="addTrains"
+          >
+            确 定
+          </el-button>
+          <el-button v-else type="primary" @click="updateTrains">
+            更新
+          </el-button>
         </div>
       </el-dialog>
     </div>
@@ -83,7 +92,7 @@
 
       <el-table-column width="180px" align="center" label="活动图片">
         <template slot-scope="{ row }">
-          <img :src="row.addressPhotoUrl" alt="" style="height:50px" />
+          <img :src="row.trainPhotoUrl" alt="" style="height:50px" />
         </template>
       </el-table-column>
 
@@ -95,6 +104,9 @@
 
       <el-table-column width="280px" align="center" label="操作">
         <template slot-scope="{ row }">
+          <el-button type="primary" size="small" @click="updateRow(row)">
+            更新
+          </el-button>
           <el-button type="danger" size="small" @click="deleteTrains(row)">
             删除
           </el-button>

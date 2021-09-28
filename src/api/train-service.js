@@ -13,6 +13,11 @@ const addTrain = async (params) => {
   return data
 }
 
+const updateTrains = async (params) => {
+  const { data } = await createInstance(baseUrl).post('/train/update', params)
+  return data
+}
+
 const deleteTrains = async (params) => {
   const { data } = await createInstance(baseUrl).post('/train/delete', params)
   return data
@@ -21,5 +26,6 @@ const deleteTrains = async (params) => {
 export default {
   getTrainList,
   addTrain,
+  updateTrains,
   deleteTrains
 }

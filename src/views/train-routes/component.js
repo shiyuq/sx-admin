@@ -24,7 +24,8 @@ export default {
         isRecommend: false,
         content: ''
       },
-      imageUrl: ''
+      imageUrl: '',
+      actionType: 'add'
     }
   },
   components: {
@@ -51,7 +52,10 @@ export default {
     changeFile (file) {
       fileUtil.getBase64(file.raw).then(data => {
         this.imageUrl = data
-        this.form.trainPhoto.baseData = data
+        this.form.trainPhoto = {
+          baseData: data,
+          fileName: 'trainsPhoto.png'
+        }
       })
     },
     async deleteTrains (row) {
@@ -80,7 +84,22 @@ export default {
         })
       })
     },
-    async addRoutes () {
+    async updateTrains () {
+      await trainService.updateTrains(this.form)
+      await this.getTrainList({ limit: 10, offset: 0 })
+      this.$message.success('活动线路更新成功')
+      this.dialogAddVisible = false
+    },
+    async updateRow (row) {
+      this.actionType = 'update'
+      this.dialogAddVisible = !this.dialogAddVisible
+      this.imageUrl = row.trainPhotoUrl
+      this.form = {
+        ...row,
+        id: row.id
+      }
+    },
+    async addTrains () {
       if (!this.form.title) {
         this.$message.error('请输入活动线路名称')
         return
@@ -101,6 +120,20 @@ export default {
       await this.getTrainList({ limit: 10, offset: 0 })
       this.$message.success('活动线路添加成功')
       this.dialogAddVisible = false
+    },
+    showDialog () {
+      this.actionType = 'add'
+      this.dialogAddVisible = true
+      this.form = {
+        title: '',
+        trainPhoto: {
+          baseData: '',
+          fileName: 'trainRoutes.png'
+        },
+        addressId: '',
+        isRecommend: false,
+        content: ''
+      }
     }
   }
 }

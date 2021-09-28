@@ -13,6 +13,9 @@
     <div class="dialog">
       <el-dialog title="添加教师风采" :visible.sync="dialogAddVisible">
         <el-form :model="form">
+          <el-form-item label="教师名字" :label-width="'120px'">
+            <el-input v-model="form.name" autocomplete="off" />
+          </el-form-item>
           <el-form-item label="教师风采图片" :label-width="'120px'">
             <el-upload
               class="avatar-uploader"
@@ -24,6 +27,11 @@
               <img v-if="imageUrl" :src="imageUrl" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
+          </el-form-item>
+          <el-form-item label="教师简介" :label-width="'120px'">
+            <div v-if="dialogAddVisible">
+              <tinymce v-model="form.content" :height="300" />
+            </div>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -53,12 +61,6 @@
       <el-table-column width="180px" align="center" label="教师风采图片">
         <template slot-scope="{ row }">
           <img :src="row.teacherPhotoUrl" alt="" style="height: 50px;" />
-        </template>
-      </el-table-column>
-
-      <el-table-column width="180px" align="center" label="教师简介">
-        <template slot-scope="{ row }">
-          <span>{{ row.content }}</span>
         </template>
       </el-table-column>
 
