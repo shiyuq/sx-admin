@@ -23,9 +23,15 @@ const updateAddress = async (params) => {
   return data
 }
 
+const deleteAddress = async (params) => {
+  const { data } = await createInstance(baseUrl).post('/address/delete', params)
+  return data
+}
+
 export default {
   getAddressList,
   getAddresses,
   addAddress,
-  updateAddress
+  updateAddress,
+  deleteAddress
 }

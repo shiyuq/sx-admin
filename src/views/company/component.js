@@ -47,6 +47,31 @@ export default {
       await this.getCompanyList({ limit: 10, offset: 0 })
       this.$message.success('企业风采添加成功')
       this.dialogAddVisible = false
+    },
+    async deleteCompany(row) {
+      this.$confirm('此操作将永久删除该企业, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        if (!row.id) {
+          this.$message({
+            type: 'error',
+            message: '请选择企业!'
+          })
+        }
+        await companyService.deleteCompany({ id: row.id })
+        await this.getCompanyList({ limit: 10, offset: 0 })
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     }
   }
 }

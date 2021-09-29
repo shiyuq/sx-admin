@@ -61,6 +61,14 @@
           <span>{{ row.createdTime }}</span>
         </template>
       </el-table-column>
+
+      <el-table-column align="center" label="操作" width="200">
+        <template slot-scope="{ row }">
+          <el-button type="danger" size="small" @click="deleteCompany(row)">
+            删除
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       background

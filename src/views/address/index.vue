@@ -87,6 +87,9 @@
             <el-button type="primary" size="small" @click="updateRow(row)">
               更新
             </el-button>
+            <el-button type="danger" size="small" @click="deleteAddress(row)">
+              删除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>

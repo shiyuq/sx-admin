@@ -13,7 +13,13 @@ const addCertificate = async (params) => {
   return data
 }
 
+const deleteCertificate = async (params) => {
+  const { data } = await createInstance(baseUrl).post('/certificate/delete', params)
+  return data
+}
+
 export default {
   getCertificateList,
-  addCertificate
+  addCertificate,
+  deleteCertificate
 }

@@ -5,13 +5,17 @@
         type="primary"
         size="small"
         icon="el-icon-edit"
-        @click="dialogAddVisible = true"
+        @click="showDialog"
       >
         添加教师风采
       </el-button>
     </div>
     <div class="dialog">
-      <el-dialog title="添加教师风采" :visible.sync="dialogAddVisible">
+      <el-dialog
+        :title="actionType === 'add' ? '添加教师风采' : '更新教师风采'"
+        :visible.sync="dialogAddVisible"
+        :width="'80%'"
+      >
         <el-form :model="form">
           <el-form-item label="教师名字" :label-width="'120px'">
             <el-input v-model="form.name" autocomplete="off" />
@@ -38,8 +42,15 @@
           <el-button @click="dialogAddVisible = false">
             取 消
           </el-button>
-          <el-button type="primary" @click="addTeacher">
+          <el-button
+            v-if="actionType === 'add'"
+            type="primary"
+            @click="addTeacher"
+          >
             确 定
+          </el-button>
+          <el-button v-else type="primary" @click="updateTeacher">
+            更 新
           </el-button>
         </div>
       </el-dialog>
@@ -67,6 +78,17 @@
       <el-table-column width="180px" align="center" label="创建时间">
         <template slot-scope="{ row }">
           <span>{{ row.createdTime }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column width="180px" align="center" label="操作">
+        <template slot-scope="{ row }">
+          <el-button type="primary" size="small" @click="updateRow(row)">
+            更新
+          </el-button>
+          <el-button type="danger" size="small" @click="deleteTeacher(row)">
+            删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>

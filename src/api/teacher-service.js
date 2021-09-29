@@ -13,7 +13,19 @@ const addTeacher = async (params) => {
   return data
 }
 
+const updateTeacher = async (params) => {
+  const { data } = await createInstance(baseUrl).post('/teacher/update', params)
+  return data
+}
+
+const deleteTeacher = async (params) => {
+  const { data } = await createInstance(baseUrl).post('/teacher/delete', params)
+  return data
+}
+
 export default {
   getTeacherList,
-  addTeacher
+  addTeacher,
+  updateTeacher,
+  deleteTeacher
 }

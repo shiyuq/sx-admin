@@ -57,6 +57,32 @@ export default {
         id: row.id
       }
     },
+    async deleteAddress(row) {
+      this.$confirm('此操作将永久删除该地址, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        if (!row.id) {
+          this.$message({
+            type: 'error',
+            message: '请选择地址!'
+          })
+          return
+        }
+        await addressService.deleteAddress({ id: row.id })
+        await this.getAddressList({ limit: 10, offset: 0 })
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
     async addAddress () {
       if (!this.addAddressForm.address) {
         this.$message.error('请输入地址名称')
@@ -67,7 +93,7 @@ export default {
         return
       }
       await addressService.addAddress(this.addAddressForm)
-      await this.getAddressList()
+      await this.getAddressList({ limit: 10, offset: 0 })
       this.$message.success('地址添加成功')
       this.dialogAddVisible = false
     },

@@ -13,7 +13,13 @@ const addCompany = async (params) => {
   return data
 }
 
+const deleteCompany = async (params) => {
+  const { data } = await createInstance(baseUrl).post('/company/delete', params)
+  return data
+}
+
 export default {
   getCompanyList,
-  addCompany
+  addCompany,
+  deleteCompany
 }
