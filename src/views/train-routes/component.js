@@ -89,6 +89,7 @@ export default {
       await this.getTrainList({ limit: 10, offset: 0 })
       this.$message.success('活动线路更新成功')
       this.dialogAddVisible = false
+      this.imageUrl = ''
     },
     async updateRow (row) {
       this.actionType = 'update'
