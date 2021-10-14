@@ -1,15 +1,5 @@
 <template>
   <div class="app-container">
-    <div style="margin-bottom: 10px;">
-      <el-button
-        type="primary"
-        size="small"
-        icon="el-icon-edit"
-        @click="dialogAddVisible = true"
-      >
-        添加用户咨询
-      </el-button>
-    </div>
     <div class="dialog">
       <el-dialog
         title="添加用户咨询"
