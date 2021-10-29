@@ -133,7 +133,7 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          if (this.loginForm.username !== 'admin' || this.loginForm.password !== 'sywl') {
+          if (this.loginForm.username !== 'admin' || this.loginForm.password !== '359peixun') {
             this.$message.error('账户名或密码错误')
             this.loading = false
             return
