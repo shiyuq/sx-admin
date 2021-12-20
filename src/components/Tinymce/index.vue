@@ -27,7 +27,7 @@ import load from './dynamicLoadScript'
 
 // why use this cdn, detail see https://github.com/PanJiaChen/tinymce-all-in-one
 const tinymceCDN =
-  'https://cdn.jsdelivr.net/npm/tinymce@5.10.2/tinymce.min.js'
+  'https://shiyuq.oss-cn-shanghai.aliyuncs.com/nodejs/package/tinymce.min.js'
 
 export default {
   name: 'Tinymce',
